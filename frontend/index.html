@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Emergency Generator Monitoring System</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-text">
+          <div class="brand-title">GENSET</div>
+          <div class="brand-subtitle">MONITORING</div>
+        </div>
+      </div>
+
+      <nav class="nav-list">
+        <button class="nav-btn active" data-section="dashboard">Dashboard</button>
+        <button class="nav-btn" data-section="kelistrikan">Kelistrikan</button>
+        <button class="nav-btn" data-section="mesin">Mesin</button>
+        <button class="nav-btn" data-section="bahanbakar">Bahan Bakar</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="footer-label">DATA SOURCE</div>
+        <div class="footer-value">Excel Dummy • Localhost</div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Industrial Monitoring Dashboard</p>
+          <h1>EMERGENCY GENERATOR MONITORING SYSTEM</h1>
+          <p class="page-subtitle">
+            Monitoring realtime parameter genset dengan visualisasi status, alarm, KPI operasional, dan tren data yang lebih mudah dibaca.
+          </p>
+        </div>
+      </header>
+
+      <section class="top-grid">
+        <article class="card clock-card">
+          <h3 class="card-title">JAM REALTIME</h3>
+          <div class="clock-wrap">
+            <div class="clock-icon">🕒</div>
+            <div>
+              <div id="clock" class="clock-time">--:--:--</div>
+              <div id="date" class="clock-date">--</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card status-card">
+          <h3 class="card-title">STATUS SISTEM</h3>
+          <div class="kv-row">
+            <span>PLN</span>
+            <span id="pln-status" class="status-pill status-critical">OFF</span>
+          </div>
+          <div class="kv-row">
+            <span>GENSET</span>
+            <span id="genset-status" class="status-pill status-normal">ON</span>
+          </div>
+          <div class="kv-row">
+            <span>MODE AKTIF</span>
+            <span id="mode-status" class="status-pill status-neutral">GENSET ACTIVE</span>
+          </div>
+        </article>
+
+        <article class="card event-card">
+          <div class="card-title-row">
+            <h3 class="card-title">EVENT LOG</h3>
+            
+          </div>
+          <div id="event-log" class="event-list"></div>
+        </article>
+
+        <article class="card alarm-card">
+          <div class="card-title-row">
+            <h3 class="card-title">ALARM SYSTEM</h3>
+            
+          </div>
+
+          <div id="alarm-system" class="alarm-body">
+            <div class="alarm-icon">✓</div>
+            <div>
+              <div id="alarm-text" class="alarm-title">NORMAL</div>
+              <div id="alarm-subtitle" class="alarm-subtitle">Semua sistem berjalan normal</div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="summary-grid" class="summary-grid"></section>
+
+      <section id="insight-grid" class="insight-grid"></section>
+
+      <section id="detail-section" class="detail-grid is-hidden">
+        <aside class="panel menu-panel">
+          <div class="panel-title-row">
+            <div>
+              <div class="panel-kicker">DETAIL</div>
+              <h3 id="detail-section-title" class="panel-title">KELISTRIKAN</h3>
+            </div>
+          </div>
+          <div id="detail-menu" class="detail-menu"></div>
+        </aside>
+
+        <section class="panel chart-container">
+          <div class="chart-head">
+            <div>
+              <h2 id="chart-title">Output Voltage (V)</h2>
+              <p id="chart-desc" class="chart-desc"></p>
+            </div>
+
+            <div class="range-buttons">
+              <button class="range-btn active" data-range="60">1 Jam</button>
+              <button class="range-btn" data-range="360">6 Jam</button>
+              <button class="range-btn" data-range="720">12 Jam</button>
+              <button class="range-btn" data-range="1440">24 Jam</button>
+            </div>
+          </div>
+
+          <div class="chart-meta">
+            <span class="live-dot">● Live</span>
+            <span id="chart-range-label" class="chart-range-label">Jendela data: 1 Jam</span>
+          </div>
+
+          <div class="chart-canvas-wrap">
+            <canvas id="mainChart"></canvas>
+          </div>
+        </section>
+
+        <aside class="panel info-panel">
+          <div class="panel-title-row">
+            <div>
+              <div class="panel-kicker">NILAI</div>
+              <h3 class="panel-title">SAAT INI</h3>
+            </div>
+            <span id="current-status" class="status-pill status-normal">NORMAL</span>
+          </div>
+
+          <div class="current-value-box">
+            <div id="current-value" class="big-number">-</div>
+            <div class="current-unit-wrap">
+              <span id="current-unit" class="current-unit">V</span>
+              <span id="current-trend" class="trend-pill">↔ Stabil</span>
+            </div>
+          </div>
+
+          <div id="info-list" class="info-list"></div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
